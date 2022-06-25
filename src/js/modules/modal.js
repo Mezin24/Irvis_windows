@@ -50,7 +50,7 @@ const modal = () => {
   );
 
   bindModal('.phone_link', '.popup', '.popup .popup_close');
-  openModalByTime('.popup', 60);
+  // openModalByTime('.popup', 60);
 };
 
 export default modal;
