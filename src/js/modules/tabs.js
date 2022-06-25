@@ -1,4 +1,10 @@
-const tabs = (containerSelector, tabSelector, contentSelector, activeClass) => {
+const tabs = (
+  containerSelector,
+  tabSelector,
+  contentSelector,
+  activeClass,
+  display = 'block'
+) => {
   const container = document.querySelector(containerSelector);
   const tabs = document.querySelectorAll(tabSelector);
   const contents = document.querySelectorAll(contentSelector);
@@ -9,13 +15,13 @@ const tabs = (containerSelector, tabSelector, contentSelector, activeClass) => {
     });
 
     tabs.forEach((item) => {
-      item.classList.remove(activeClass.replace(/\./, ''));
+      item.classList.remove(activeClass);
     });
   };
 
   const showTab = (i = 0) => {
-    tabs[i].classList.add(activeClass.replace(/\./, ''));
-    contents[i].style.display = 'block';
+    tabs[i].classList.add(activeClass);
+    contents[i].style.display = display;
   };
 
   container.addEventListener('click', (e) => {
