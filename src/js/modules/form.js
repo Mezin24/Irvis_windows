@@ -1,15 +1,10 @@
-const form = () => {
+import numberInputValidation from './numberValidation';
+
+const form = (state) => {
   const forms = document.querySelectorAll('form');
   const inputs = document.querySelectorAll('input');
-  const phoneInputs = document.querySelectorAll('input[name="user_phone"');
 
-  const phoneInputValidation = (input) => {
-    input.addEventListener('input', () => {
-      console.log('object');
-      input.value = input.value.replace(/\D/, '');
-    });
-  };
-  phoneInputs.forEach(phoneInputValidation);
+  numberInputValidation('input[name="user_phone"');
 
   const message = {
     loading: 'Загрузка...',
@@ -42,6 +37,11 @@ const form = () => {
       form.append(statusEl);
 
       const formData = new FormData(form);
+      if (form.getAttribute('data-calc') === 'end') {
+        for (let key in state) {
+          formData.append(key, state[key]);
+        }
+      }
       clearInputs();
       postData('../assets/server.php', formData)
         .then((res) => {
@@ -50,7 +50,13 @@ const form = () => {
         })
         .catch(() => (statusEl.textContent = message.failure))
         .finally(() => {
-          setTimeout(() => statusEl.remove(), 5000);
+          setTimeout(() => {
+            statusEl.remove();
+            document.querySelectorAll('[data-modal]').forEach((form) => {
+              form.style.display = 'none';
+              document.body.classList.remove('modal-open');
+            });
+          }, 5000);
         });
     });
   });
