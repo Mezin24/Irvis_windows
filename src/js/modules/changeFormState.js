@@ -23,7 +23,6 @@ const changeFormState = (state) => {
           case 'INPUT': {
             if (item.type === 'text') {
               state[stateProp] = item.value;
-              console.log(state);
             } else if (item.type === 'checkbox') {
               windowTempCheckbox.forEach((item) => {
                 item.checked = false;

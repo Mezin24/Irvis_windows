@@ -3,6 +3,7 @@ import modal from './modules/modal';
 import tabs from './modules/tabs';
 import form from './modules/form';
 import changeFormState from './modules/changeFormState';
+import timer from './modules/timer';
 
 window.addEventListener('DOMContentLoaded', () => {
   'use strict';
@@ -26,4 +27,6 @@ window.addEventListener('DOMContentLoaded', () => {
     'inline-block'
   );
   form(formState);
+  timer('.container1', '2022-06-26T23:00:00');
+  // timer('.container1', '2022-06-26');
 });
