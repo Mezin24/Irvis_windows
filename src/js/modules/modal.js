@@ -11,6 +11,7 @@ const modal = () => {
     const modal = document.querySelector(modalSelector);
     const close = document.querySelector(closeSelector);
     const modals = document.querySelectorAll('[data-modal]');
+    const scroll = calcScroll();
 
     const closeModals = () => {
       modals.forEach((modal) => (modal.style.display = 'none'));
@@ -19,12 +20,14 @@ const modal = () => {
     function openModal(modal) {
       modal.style.display = 'block';
       document.body.classList.add('modal-open');
+      document.body.style.marginRight = `${scroll}px`;
       opened = true;
     }
 
     function closeModal(modal) {
       modal.style.display = 'none';
       document.body.classList.remove('modal-open');
+      document.body.style.marginRight = `0px`;
       closeModals();
     }
 
@@ -55,6 +58,22 @@ const modal = () => {
       document.body.classList.add('modal-open');
     }, time * 1000);
   }
+
+  function calcScroll() {
+    const div = document.createElement('div');
+    div.style.width = '50px';
+    div.style.height = '50px';
+    div.style.overflowY = 'scroll';
+    div.style.visibility = 'hidden';
+
+    document.body.append(div);
+    const scrollWidth = div.offsetWidth - div.clientWidth;
+    div.remove();
+
+    return scrollWidth;
+  }
+
+  calcScroll();
 
   bindModal(
     '.popup_engineer_btn',
